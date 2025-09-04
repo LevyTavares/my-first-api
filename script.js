@@ -1,5 +1,5 @@
 // URL da sua API no Render
-const API_URL = "https://my-first-api-d6j0.onrender.com/me";
+const API_URL = "http://127.0.0.1:8000/me"
 
 // Seleciona o elemento HTML onde as informações serão mostradas
 const profileInfoDiv = document.getElementById('profile-info');
