@@ -1,41 +1,53 @@
-// URL da sua API no Render
-const API_URL = "http://127.0.0.1:8000/me"
+// URLs da sua API (local e online)
+const API_URL_LOCAL = "http://127.0.0.1:8000/me";
+const API_URL_ONLINE = "https://my-first-api-d6j0.onrender.com/me";
 
-// Seleciona o elemento HTML onde as informações serão mostradas
+// Seleciona os elementos HTML
 const profileInfoDiv = document.getElementById('profile-info');
 const mainTitle = document.querySelector('h1');
 
 // Função para buscar os dados da API
 async function fetchProfileData() {
     try {
-        const response = await fetch(API_URL);
-        
-        // Verifica se a resposta foi bem-sucedida (status 200)
-        if (!response.ok) {
-            throw new Error(`Erro na rede: ${response.status}`);
-        }
-        
-        // Converte a resposta para JSON
-        const data = await response.json();
-        
-        // Remove a mensagem de carregamento
-        mainTitle.textContent = "Meu Perfil";
+        mainTitle.textContent = "Carregando informações...";
 
-        // Exibe os dados na página
-        displayProfileData(data);
+        // Primeiro, tenta a API local
+        const responseLocal = await fetch(API_URL_LOCAL);
         
+        // Se a API local responder, use os dados dela
+        if (responseLocal.ok) {
+            const data = await responseLocal.json();
+            mainTitle.textContent = "Meu Perfil (Local)";
+            displayProfileData(data);
+            return;
+        }
     } catch (error) {
-        console.error("Falha ao carregar os dados:", error);
-        mainTitle.textContent = "Erro ao carregar os dados";
+        console.warn("Falha ao conectar na API local. Tentando a API online...");
     }
+
+    // Se a API local falhou, tenta a API online
+    try {
+        const responseOnline = await fetch(API_URL_ONLINE);
+        
+        if (responseOnline.ok) {
+            const data = await responseOnline.json();
+            mainTitle.textContent = "Meu Perfil (Online)";
+            displayProfileData(data);
+            return;
+        }
+    } catch (error) {
+        console.error("Falha ao carregar os dados de ambas as APIs:", error);
+    }
+
+    // Se nenhuma das APIs funcionou
+    mainTitle.textContent = "Erro ao carregar os dados";
 }
 
 // Função para exibir os dados no HTML
 function displayProfileData(data) {
-    // Limpa o conteúdo anterior
     profileInfoDiv.innerHTML = '';
     
-    // Cria um elemento HTML para cada item de informação
+    // Cria os elementos HTML para cada item de informação
     const name = document.createElement('div');
     name.className = 'info-item';
     name.textContent = `Nome: ${data.nome}`;
@@ -50,7 +62,12 @@ function displayProfileData(data) {
 
     const github = document.createElement('div');
     github.className = 'info-item';
-    github.textContent = `GitHub: ${data.github}`;
+    const githubLink = document.createElement('a');
+    githubLink.href = data.github;
+    githubLink.target = "_blank";
+    githubLink.textContent = data.github;
+    github.appendChild(document.createTextNode('GitHub: '));
+    github.appendChild(githubLink);
     
     const cidade = document.createElement('div');
     cidade.className = 'info-item';
