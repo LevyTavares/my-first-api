@@ -40,11 +40,11 @@ def get_aluno_info():
     """
     # Substitua com suas informações pessoais
     minhas_informacoes = {
-        "nome": "Seu Nome",
-        "email": "seu.email@exemplo.com",
-        "curso": "Seu Curso",
-        "github": "https://github.com/SeuUsuario",
-        "cidade": "Sua Cidade",
-        "interesses": ["Programação", "Inteligência Artificial", "Caminhada"]
+        "nome": "Isaías Levi Tavaresd da Silva",
+        "email": "isaiaslevi2@gmail.com",
+        "curso": "Sistemas de Informação",
+        "github": "https://github.com/LevyTavares",
+        "cidade": "Barbalha - CE",
+        "interesses": ["Programação", "Música", "Caminhada"]
     }
     return minhas_informacoes
