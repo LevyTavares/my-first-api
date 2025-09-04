@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Perfil com Tailwind</title>
+    <title>Meu Perfil Dark</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Adicionando um pequeno estilo customizado para um fundo sutil */
+        body {
+            background-color: #1a202c; /* Cor de fundo escura */
+            color: #e2e8f0; /* Cor do texto padrão */
+        }
+        /* Ajuste para o link do GitHub para ser visível em fundo escuro */
+        .info-item a {
+            color: #63b3ed; /* Azul claro para links */
+            text-decoration: none;
+        }
+        .info-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 flex justify-center items-center min-h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-11/12 max-w-sm text-center">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6">Carregando informações...</h1>
-        <div id="profile-info" class="space-y-4">
+<body class="flex justify-center items-center min-h-screen">
+    <div class="bg-gray-800 p-8 rounded-lg shadow-xl w-11/12 max-w-sm text-center border border-gray-700">
+        <h1 class="text-3xl font-extrabold text-white mb-6">Meu Perfil</h1>
+        <div id="profile-info" class="space-y-4 text-gray-300">
             </div>
     </div>
     <script src="script.js"></script>
