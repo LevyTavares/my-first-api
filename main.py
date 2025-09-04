@@ -2,9 +2,23 @@
 
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 # Cria uma instância da classe FastAPI
 app = FastAPI()
+
+# Lista de origens que podem acessar sua API
+origins = [
+    "*" # Isso permite todas as origens (bom para testes)
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # -----------------
 # MODELO (opcional, mas boa prática)
